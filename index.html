@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Build List — Everything In The Setup</title>
+<style>
+  :root{
+    --bg: #0d1117;
+    --bg-alt: #141b21;
+    --panel: #1a2129;
+    --walnut: #b5651d;
+    --walnut-light: #d98a3f;
+    --amber: #b5651d;
+    --amber-soft: #d98a3f;
+    --rust: #3b6e7a;
+    --olive: #3b6e7a;
+    --text: #d9c9a8;
+    --text-dim: #7d8a92;
+    --border: #26323b;
+    --radius: 14px;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: radial-gradient(ellipse at top, #0f1720 0%, var(--bg) 55%);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+  }
+  a{ color: inherit; text-decoration: none; }
+
+  /* ---------- Background photo treatment ---------- */
+  .hero-bg{
+    position: fixed;
+    inset: 0;
+    background-image: url("image.jpg");
+    background-size: cover;
+    background-position: center 30%;
+    opacity: 0.16;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-bg::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--bg) 35%, transparent 100%);
+  }
+  .glow{
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(181,101,29,0.08) 0%, transparent 70%);
+    bottom: -200px;
+    left: -100px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .glow-2{
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59,110,122,0.18) 0%, transparent 70%);
+    top: 100px;
+    right: -100px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  header.hero, nav.pillbar, main, footer{ position: relative; z-index: 1; }
+
+  /* ---------- Header ---------- */
+  header.hero{
+    padding: 90px 24px 60px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    background:
+      radial-gradient(circle at 50% 0%, rgba(181,101,29,0.10), transparent 60%);
+  }
+  .eyebrow{
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 12px;
+    color: var(--amber);
+    margin-bottom: 14px;
+  }
+  h1.brand{
+    font-size: clamp(3rem, 9vw, 5.5rem);
+    margin: 0 0 20px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    line-height: 0.95;
+  }
+  h1.brand span{ color: var(--amber); }
+  .tagline{
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .header-divider{
+    width: 60px;
+    height: 3px;
+    background: var(--amber);
+    margin: 22px auto;
+    border-radius: 2px;
+  }
+  .intro-copy{
+    max-width: 680px;
+    margin: 0 auto;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+  }
+  .intro-copy strong{ color: var(--amber-soft); }
+
+  .disclosure{
+    margin: 28px auto 0;
+    max-width: 680px;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    text-align:left;
+  }
+
+  .about-panel{
+    margin: 28px auto 0;
+    max-width: 780px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--amber);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    text-align: left;
+  }
+  .about-panel h2{
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.05rem;
+    margin: 0 0 16px;
+  }
+  .about-panel p{
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin: 0 0 14px;
+  }
+  .about-panel p:last-child{ margin-bottom: 0; }
+  .about-panel strong{ color: var(--amber-soft); }
+
+  /* ---------- Nav ---------- */
+  nav.pillbar{
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display:flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    background: rgba(20,16,12,0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav.pillbar a{
+    font-size: 0.82rem;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    transition: all .2s ease;
+    white-space: nowrap;
+  }
+  nav.pillbar a:hover{
+    color: var(--bg);
+    background: var(--amber);
+    border-color: var(--amber);
+  }
+
+  /* ---------- Sections ---------- */
+  main{ max-width: 1180px; margin: 0 auto; padding: 10px 24px 80px; }
+  section.category{ padding: 56px 0 28px; border-bottom: 1px solid var(--border); }
+  section.category:last-child{ border-bottom: none; }
+
+  .cat-head{
+    display:flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 26px;
+  }
+  .cat-icon{ font-size: 1.6rem; }
+  .cat-head h2{
+    margin:0;
+    font-size: 1.7rem;
+    letter-spacing: -0.5px;
+  }
+  .cat-count{
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin-left: auto;
+  }
+
+  .grid{
+    display:flex;
+    flex-direction: column;
+    border-top: 1px solid var(--border);
+  }
+
+  .card{
+    border-bottom: 1px solid var(--border);
+    transition: background-color .2s ease, padding-left .2s ease;
+  }
+  .card:hover{
+    background-color: rgba(181,101,29,0.07);
+    padding-left: 6px;
+  }
+  .card:hover .card-link{ color: var(--amber-soft); }
+  .badge{
+    align-self: flex-start;
+    background: var(--amber);
+    color: #1b1510;
+    font-size: 0.62rem;
+    font-weight:700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 999px;
+    margin-bottom: 4px;
+  }
+  .card-body{
+    padding: 20px 6px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 28px;
+  }
+  .card-meta{
+    flex: 0 0 250px;
+    display:flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .card-title{ font-size: 1rem; font-weight: 600; }
+  .card-sub{ font-size: 0.75rem; color: var(--amber-soft); text-transform: uppercase; letter-spacing: 0.4px; }
+  .card-desc{
+    flex: 1;
+    font-size: 0.87rem;
+    color: var(--text-dim);
+    padding-right: 20px;
+  }
+  .card-link{
+    flex: 0 0 auto;
+    font-size: 0.82rem;
+    color: var(--amber);
+    font-weight: 600;
+    white-space: nowrap;
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    transition: color .2s ease;
+  }
+
+  @media (max-width: 720px){
+    .card-body{
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 18px 6px;
+    }
+    .card-meta{ flex-basis: auto; }
+    .card-desc{ padding-right: 0; }
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    text-align:center;
+    padding: 50px 24px 70px;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+  }
+  footer .handle{
+    color: var(--amber-soft);
+    font-weight: 600;
+    display:block;
+    margin-bottom: 6px;
+    font-size: 1rem;
+  }
+  footer .fine-print{
+    max-width: 640px;
+    margin: 22px auto 0;
+    font-size: 0.75rem;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 480px){
+    header.hero{ padding: 60px 18px 40px; }
+    section.category{ padding: 40px 0 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+<div class="glow"></div>
+<div class="glow-2"></div>
+
+<header class="hero">
+  <div class="eyebrow">The Complete Build List</div>
+  <h1 class="brand">Grifter's<br><span>Build List</span></h1>
+  <p class="tagline">Everything in the setup</p>
+  <div class="header-divider"></div>
+  <p class="intro-copy">
+    Your workspace is your haven. This is my little slice of peace. This page lists
+    every item in the setup which is organized by category, with a short description.
+  </p>
+  <div class="disclosure">
+    <span><strong>Affiliate Disclosure (placeholder):</strong> This page may contain
+    affiliate links. If you buy something through a link here, it may earn a small
+    commission at no extra cost to you. Replace this with your real disclosure and
+    program names (Amazon Associates, Etsy Affiliate, etc.) before publishing.</span>
+  </div>
+  <div class="about-panel">
+    <h2>About This Build</h2>
+    <p><strong>Your space is your haven</strong> — making it your own is what this is all about. Mine is a shared room that doubles as an office and gaming area. The goal from the start was to avoid the RGB-drenched streamer aesthetic you see everywhere online, and instead build something warm and inviting — a place to unwind, create, and actually enjoy being in.</p>
+    <p>Walnut tones, low amber lighting, and a shelf of books and small decor pieces give the room its anchor. From there, every piece I added had to earn its spot — <strong>nothing chrome, nothing loud, nothing that clashes with that feel.</strong></p>
+    <p><strong>Nothing on this page is staged or sponsored.</strong> Every item shown is something I actually use, sitting exactly where it sits in the room.</p>
+  </div>
+</header>
+
+<nav class="pillbar">
+  <a href="#pc-build">PC Build</a>
+  <a href="#monitors">Monitor &amp; Peripherals</a>
+  <a href="#desk">Desk</a>
+  <a href="#lighting">Lighting</a>
+  <a href="#content-gear">Content Gear</a>
+</nav>
+
+<main>
+
+  <!-- 1. PC BUILD -->
+  <section class="category" id="pc-build">
+    <div class="cat-head">
+      <h2>PC Build</h2>
+      <span class="cat-count">6 items</span>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">NVIDIA RTX 4060</div>
+            <div class="card-sub">GPU — 8GB GDDR6, Ada Lovelace</div>
+          </div>
+          <div class="card-desc">Handles 1440p gaming and creative work comfortably, with DLSS 3 frame generation keeping things smooth without pushing power draw or heat into unreasonable territory.</div>
+          <a class="card-link" href="https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4060-4060ti/">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">Intel i7 14700K</div>
+            <div class="card-sub">CPU — 20 Cores (8P+12E) / 28 Threads</div>
+          </div>
+          <div class="card-desc">Intel's hybrid core design gives strong single-thread performance for gaming alongside enough multi-threaded muscle for streaming and editing at the same time.</div>
+          <a class="card-link" href="#">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">Lian Li GA II Trinity</div>
+            <div class="card-sub">AIO Liquid Cooler — 240mm Radiator</div>
+          </div>
+          <div class="card-desc">Lian Li's Trinity pairs a 240mm radiator with SL-Infinity fans, so the cooling loop and the case lighting are the same visual language instead of two competing effects.</div>
+          <a class="card-link" href="https://www.amazon.com/dp/B0CDV5H54Q?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_5">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">Lian Li Uni Fan SL-Inf</div>
+            <div class="card-sub">Case Fans — 120mm, Daisy-Chain ARGB</div>
+          </div>
+          <div class="card-desc">The infinity-mirror fan design was chosen as much for looks as airflow — up to four fans daisy-chain off a single cable, keeping the inside of the case clean.</div>
+          <a class="card-link" href="https://www.amazon.com/dp/B0B5GX6SCW?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_4">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">Corsair Vengeance RAM 64GB</div>
+            <div class="card-sub">Memory — DDR4</div>
+          </div>
+          <div class="card-desc"></div>
+          <a class="card-link" href="https://www.corsair.com/us/en/p/memory/cmw32gx4m2e3200c16/vengeance-rgb-pro-32gb-2-x-16gb-ddr4-dram-3200mhz-c16-memory-kit-black-cmw32gx4m2e3200c16?position=1&queryID=7153f54bf3e193cc396bc230e4d568c1">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">Samsung 990 Pro 2TB</div>
+            <div class="card-sub">Storage — PCIe 4.0 M.2 SSD</div>
+          </div>
+          <div class="card-desc"></div>
+          <a class="card-link" href="https://www.amazon.com/dp/B0BHJJ9Y77?lv=shuf&channelId=500&plpRedirect=mhFallback">View product →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. MONITOR & PERIPHERALS -->
+  <section class="category" id="monitors">
+    <div class="cat-head">
+      <h2>Monitor &amp; Peripherals</h2>
+      <span class="cat-count">6 items</span>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="badge">Centerpiece</span>
+            <div class="card-title">DJREX 34" Monitor</div>
+            <div class="card-sub">Monitor — 34" Ultrawide, 3440x1440, 165Hz</div>
+          </div>
+          <div class="card-desc">The ultrawide curve is the centerpiece of the desk — 1500R curvature and a 165Hz refresh rate make it equally at home for productivity and gaming.</div>
+          <a class="card-link" href="https://www.amazon.com/dp/B0DYTY3BJ7?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_3&th=1">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">Sceptre 24" Monitor</div>
+            <div class="card-sub">Monitor — 24" IPS, 1080p, 165Hz</div>
+          </div>
+          <div class="card-desc">A secondary IPS panel for chat, reference material, or a second app open at all times — high refresh rate keeps motion smooth even in a supporting role.</div>
+          <a class="card-link" href="#">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">ErGear Single Monitor Arm</div>
+            <div class="card-sub">Monitor Arm — Gas Spring, holds up to 19.8 lbs</div>
+          </div>
+          <div class="card-desc">A tool-free VESA mount with full tilt, swivel, and rotation — frees up desk space and keeps cable routing tidy behind the panel.</div>
+          <a class="card-link" href="https://www.amazon.com/dp/B0FQM6QB48?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_3&th=1">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">Logitech Pro X Superlight</div>
+            <div class="card-sub">Mouse — Wireless, HERO 25K Sensor</div>
+          </div>
+          <div class="card-desc">Logitech's flagship wireless sensor with essentially zero perceptible latency, in an ultra-lightweight shell built for fast, fatigue-free movement.</div>
+          <a class="card-link" href="https://www.logitechg.com/en-us/shop/p/pro-x-superlight-wireless-mouse">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">Keychron K2 HE</div>
+            <div class="card-sub">Keyboard — Hall Effect Magnetic Switches</div>
+          </div>
+          <div class="card-desc">Magnetic switches with adjustable actuation and rapid trigger mean no physical wear over time, and the feel can be tuned rather than locked to one switch type.</div>
+          <a class="card-link" href="https://www.keychron.com/collections/keychron-he-keyboards/products/keychron-k2-he-wireless-magnetic-switch-keyboard">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">Logitech Pro X 2</div>
+            <div class="card-sub">Headset — Wireless, Pro-G 50mm Drivers</div>
+          </div>
+          <div class="card-desc">Built for competitive clarity — Logitech's Pro-G drivers and Blue VO!CE mic processing keep both game audio and voice chat sounding clean over long sessions.</div>
+          <a class="card-link" href="https://www.logitechg.com/en-us/shop/p/pro-x-2-wireless-headset.981-001262">View product →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. DESK -->
+  <section class="category" id="desk">
+    <div class="cat-head">
+      <h2>Desk</h2>
+      <span class="cat-count">4 items</span>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="badge">Hero Piece</span>
+            <div class="card-title">TOPSKY Dual Motor Standing Desk Frame</div>
+            <div class="card-sub">Standing Desk Frame — Dual Motor, up to 300 lb Capacity</div>
+          </div>
+          <div class="card-desc">A frame-only setup so the desktop could be chosen separately — the dual motors lift smoothly and quietly, with memory presets for sit and stand heights.</div>
+          <a class="card-link" href="https://amazon.com/dp/B08C2LC3H2?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_8">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">IKEA Lagkapten Desktop</div>
+            <div class="card-sub">Desktop — IKEA LAGKAPTEN Tabletop</div>
+          </div>
+          <div class="card-desc">A simple, affordable tabletop paired with the standing frame — clean surface with no unnecessary texture competing with the rest of the setup.</div>
+          <a class="card-link" href="https://www.ikea.com/us/en/p/lagkapten-tabletop-black-brown-60487017/#content">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">Cable Management Tray</div>
+            <div class="card-sub">Cable Management</div>
+          </div>
+          <div class="card-desc">How it keeps the desk surface and floor clean.</div>
+          <a class="card-link" href="https://www.amazon.com/dp/B0CT9ZY4YT?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_5">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">Felt Desk Mat</div>
+            <div class="card-sub">Desk Mat</div>
+          </div>
+          <div class="card-desc">Texture, size, and grip notes.</div>
+          <a class="card-link" href="https://www.amazon.com/DAWNTREES-Extra-Keyboard-Computer-Office/dp/B09MVT9Y98/">View product →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. LIGHTING -->
+  <section class="category" id="lighting">
+    <div class="cat-head">
+      <h2>Lighting</h2>
+      <span class="cat-count">2 items</span>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="badge">Hero Piece</span>
+            <div class="card-title">Govee Lighting Hub</div>
+            <div class="card-sub">Smart Lighting Control — Wi-Fi / Bluetooth App Ecosystem</div>
+          </div>
+          <div class="card-desc">Ties every Govee strip and light in the corner into one set of scenes, controlled from a single app instead of juggling several separate remotes.</div>
+          <a class="card-link" href="#">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">Govee RGBIC LED Strip Lights</div>
+            <div class="card-sub">LED Strip — RGBIC, up to 32.8 ft, App/Voice Control</div>
+          </div>
+          <div class="card-desc">Runs under the desk and behind the monitor — RGBIC segments let multiple colors show at once instead of one flat wash of light.</div>
+          <a class="card-link" href="https://www.amazon.com/dp/B0991Q94KP?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_3&th=1">View product →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. CONTENT GEAR -->
+  <section class="category" id="content-gear">
+    <div class="cat-head">
+      <h2>Content Gear</h2>
+      <span class="cat-count">7 items</span>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">Shure MV7</div>
+            <div class="card-sub">Microphone — USB/XLR Hybrid Dynamic Mic</div>
+          </div>
+          <div class="card-desc">A broadcast-style dynamic capsule with both USB and XLR outputs, so it can start simple and scale up to a full audio interface later without buying a new mic.</div>
+          <a class="card-link" href="https://www.amazon.com/dp/B08G7RG9ML?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_5&th=1">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">Thronmax Twist S6 Microphone Boom Arm</div>
+            <div class="card-sub">Mic Boom Arm — All-Metal, holds up to 5.5 lb</div>
+          </div>
+          <div class="card-desc">Low-profile arm with internal cable routing and a 715mm reach — keeps the mic close without a cable running visibly across the desk.</div>
+          <a class="card-link" href="https://www.amazon.com/dp/B0B824XX8T?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_8&th=1">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">Elgato Wave XLR Mk.2</div>
+            <div class="card-sub">Audio Interface — XLR Mixer with Built-In Preamp</div>
+          </div>
+          <div class="card-desc">Handles the gain staging and mixing for the XLR mic setup, with a physical dial and Wave Link software for routing audio sources independently.</div>
+          <a class="card-link" href="https://www.amazon.com/dp/B0GGYXY67H?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_2">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">Elgato Facecam</div>
+            <div class="card-sub">Webcam — 1080p60, Sony STARVIS Sensor</div>
+          </div>
+          <div class="card-desc">A fixed-focus sensor built for consistent, low-light-friendly video without the autofocus hunting some webcams do mid-call or mid-stream.</div>
+          <a class="card-link" href="https://www.amazon.com/Elgato-Facecam-MK-2-Streaming-Recording/dp/B0CW1S7XP5/">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">Elgato Stream Deck MK.2</div>
+            <div class="card-sub">Stream Deck — 15 Customizable LCD Keys</div>
+          </div>
+          <div class="card-desc">Used for scene switching, audio routing, and triggering lighting scenes — a physical control surface that's faster than digging through software menus.</div>
+          <a class="card-link" href="https://www.amazon.com/Elgato-Stream-Deck-MK-2-Controller/dp/B09738CV2G/">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">Elgato Stream Deck XL</div>
+            <div class="card-sub">Stream Deck — 32 Customizable LCD Keys</div>
+          </div>
+          <div class="card-desc">The larger-format Stream Deck for a setup with enough going on to need more one-touch controls than the standard model can hold.</div>
+          <a class="card-link" href="https://www.amazon.com/Elgato-Stream-Deck-XL-customizable/dp/B07RL8H55Z/">View product →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-title">Sanyun Desktop Speakers</div>
+            <div class="card-sub">Desktop Speakers — 2.0 Channel, USB Powered</div>
+          </div>
+          <div class="card-desc">Compact powered speakers that sit near-field on the desk — enough clarity and bass for music and calls without needing a separate amp.</div>
+          <a class="card-link" href="#">View product →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="handle">@yourhandle</span>
+  on Instagram &amp; TikTok — affiliate links support the channel, appreciate you.
+  <p class="fine-print">
+    Replace this footer with your own handle and program disclosures before publishing.
+  </p>
+</footer>
+
+</body>
+</html>
