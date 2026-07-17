@@ -86,12 +86,14 @@
     margin-bottom: 14px;
   }
   h1.brand{
-    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-size: clamp(3rem, 8vw, 5.5rem);
     margin: 0 0 8px;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: -1px;
+    line-height: 0.95;
+    text-transform: uppercase;
   }
-  h1.brand span{ color: var(--amber-soft); }
+  h1.brand span{ color: var(--amber); display: block; }
   .tagline{
     color: var(--text-dim);
     font-size: 1.05rem;
@@ -106,20 +108,30 @@
   }
   .intro-copy strong{ color: var(--amber-soft); }
 
-  .disclosure{
+  .about-panel{
     margin: 28px auto 0;
-    max-width: 680px;
-    display:flex;
-    gap:10px;
-    align-items:flex-start;
+    max-width: 780px;
     background: var(--panel);
     border: 1px solid var(--border);
+    border-left: 4px solid var(--amber);
     border-radius: var(--radius);
-    padding: 14px 18px;
-    font-size: 0.82rem;
-    color: var(--text-dim);
-    text-align:left;
+    padding: 28px 32px;
+    text-align: left;
   }
+  .about-panel h2{
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    margin: 0 0 14px;
+  }
+  .about-panel p{
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    margin: 0 0 14px;
+  }
+  .about-panel p:last-child{ margin-bottom: 0; }
+  .about-panel strong{ color: var(--amber-soft); }
 
   /* ---------- Nav ---------- */
   nav.pillbar{
@@ -252,19 +264,38 @@
     color: var(--text-dim);
     font-size: 0.85rem;
   }
-  footer .handle{
-    color: var(--amber-soft);
+  .social-links{
+    display:flex;
+    justify-content:center;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .social-link{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding: 11px 20px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--text);
     font-weight: 600;
-    display:block;
-    margin-bottom: 6px;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    transition: all .2s ease;
   }
-  footer .fine-print{
-    max-width: 640px;
-    margin: 22px auto 0;
-    font-size: 0.75rem;
-    opacity: 0.7;
+  .social-link svg{
+    width: 18px;
+    height: 18px;
+    fill: var(--amber);
+    transition: fill .2s ease;
+    flex-shrink: 0;
   }
+  .social-link:hover{
+    background: var(--amber);
+    color: var(--bg);
+    border-color: var(--amber);
+  }
+  .social-link:hover svg{ fill: var(--bg); }
 
   @media (max-width: 480px){
     header.hero{ padding: 60px 18px 40px; }
@@ -280,18 +311,17 @@
 
 <header class="hero">
   <div class="eyebrow">The Complete Build List</div>
-  <h1 class="brand">The Build <span>List</span></h1>
+  <h1 class="brand">Grifter's<span>Build List</span></h1>
   <p class="tagline">Everything in the setup — curated, tested, and actually in use.</p>
   <p class="intro-copy">
-    The idea here is simple: <strong>a corner, not a room.</strong> This page lists every
-    item in the setup, organized by category, with a quick note on why each piece made the
-    cut. <em>(Preview: per-item photo slot, wired to real manufacturer/retailer images where found.)</em>
+    Your workspace is your haven. This is my little slice of peace. This page lists
+    every item in the setup which is organized by category, with a short description.
   </p>
-  <div class="disclosure">
-    <span><strong>Affiliate Disclosure (placeholder):</strong> This page may contain
-    affiliate links. If you buy something through a link here, it may earn a small
-    commission at no extra cost to you. Replace this with your real disclosure and
-    program names (Amazon Associates, Etsy Affiliate, etc.) before publishing.</span>
+  <div class="about-panel">
+    <h2>About This Build</h2>
+    <p><strong>Your space is your haven</strong> — making it your own is what this is all about. Mine is a shared room that doubles as an office and gaming area. The goal from the start was to avoid the RGB-drenched streamer aesthetic you see everywhere online, and instead build something warm and inviting — a place to unwind, create, and actually enjoy being in.</p>
+    <p>Walnut tones, low amber lighting, and a shelf of books and small decor pieces give the room its anchor. From there, every piece I added had to earn its spot — <strong>nothing chrome, nothing loud, nothing that clashes with that feel.</strong></p>
+    <p><strong>Nothing on this page is staged or sponsored.</strong> Every item shown is something I actually use, sitting exactly where it sits in the room.</p>
   </div>
 </header>
 
@@ -301,6 +331,7 @@
   <a href="#desk">Desk</a>
   <a href="#lighting">Lighting</a>
   <a href="#content-gear">Content Gear</a>
+  <a href="gallery.html">Gallery</a>
 </nav>
 
 <main>
@@ -636,11 +667,16 @@
 </main>
 
 <footer>
-  <span class="handle">@yourhandle</span>
-  on Instagram &amp; TikTok — affiliate links support the channel, appreciate you.
-  <p class="fine-print">
-    Replace this footer with your own handle and program disclosures before publishing.
-  </p>
+  <div class="social-links">
+    <a class="social-link" href="https://www.instagram.com/grifter.gaming/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.256 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.065.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 1.802c-2.67 0-2.986.01-4.04.059-.976.045-1.505.207-1.858.344-.466.181-.8.398-1.15.748-.35.35-.566.684-.747 1.15-.137.353-.3.882-.344 1.857-.05 1.055-.06 1.37-.06 4.04 0 2.67.01 2.986.06 4.04.045.976.207 1.505.344 1.858.181.466.396.8.747 1.15.35.35.684.566 1.15.747.353.137.882.3 1.857.344 1.054.05 1.37.06 4.04.06 2.67 0 2.987-.01 4.04-.06.976-.045 1.505-.207 1.858-.344.466-.181.8-.396 1.15-.747.35-.35.566-.684.747-1.15.137-.353.3-.882.344-1.857.05-1.055.06-1.37.06-4.04 0-2.67-.01-2.986-.06-4.04-.045-.976-.207-1.505-.344-1.858a3.09 3.09 0 0 0-.747-1.15 3.098 3.098 0 0 0-1.15-.747c-.353-.137-.882-.3-1.857-.344-1.055-.05-1.37-.06-4.04-.06zm0 4.594a5.604 5.604 0 1 1 0 11.208 5.604 5.604 0 0 1 0-11.208zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm7.144-9.809a1.31 1.31 0 1 1-2.62 0 1.31 1.31 0 0 1 2.62 0z"/></svg>
+      <span>@grifter.gaming</span>
+    </a>
+    <a class="social-link" href="https://www.tiktok.com/@griftergaming33" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+      <span>@griftergaming33</span>
+    </a>
+  </div>
 </footer>
 
 </body>
